@@ -1,37 +1,33 @@
 .amour{
     background-color: crimson;
-    width: 200px;
-    height: 150px;
-    margin: 10px;
+    
 }
 .le-temps-qui-passe{
     background-color: fuchsia;
-    width: 200px;
-    height: 150px;
-    margin: 10px;
+    
 }
 .la-nature{
     background-color: darkgreen;
-    width: 200px;
-    height: 150px;
-    margin: 10px;
+    
 }
 .la-mort-et-la-melancolie{
     color: white;
     background-color: black;
-    width: 200px;
-    height: 150px;
-    margin: 10px;
+   
 }
 .engagement{
     background-color: cyan;
-    width: 200px;
-    height: 150px;
-    margin: 10px;
+    
 
 }
 .theme-poetique{
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+}
+
+.amour, .le-temps-qui-passe, .la-nature, .la-mort-et-la-melancolie, .engagement{
+    width: 200px;
+    height: 150px;
+    margin: 10px;
 }
