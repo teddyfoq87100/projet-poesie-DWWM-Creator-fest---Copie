@@ -30,3 +30,8 @@
     margin: 10px;
 
 }
+.theme-poetique{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
