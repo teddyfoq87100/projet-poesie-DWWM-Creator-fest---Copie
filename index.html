@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- EN-TÊTE DU SITE -->
     <header>
       <h1>The Garden of Poetry</h1>
       <nav>
@@ -19,30 +20,98 @@
       </nav>
       <a href="#" class="btn-ecrire">Ecrire un Poeme</a>
     </header>
+
+    <!-- CONTENU PRINCIPAL -->
     <main>
+      <!-- 1. SECTION DES THÈMES -->
+      <section class="theme-poetique">
+        <article class="amour">
+          <h2>Amour</h2>
+        </article>
+        <article class="le-temps-qui-passe">
+          <h2>Le temps qui passe</h2>
+        </article>
+        <article class="la-nature">
+          <h2>La nature</h2>
+        </article>
+        <article class="la-mort-et-la-melancolie">
+          <h2>La Mort et la mélancolie</h2>
+        </article>
+        <article class="engagement">
+          <h2>l'engagement</h2>
+        </article>
+      </section>
+
+      <!-- 2. FORMULAIRE D'ÉCRITURE -->
       <form>
-        <section class="theme-poetique">
-          <article class="amour">
-            <h2>Amour</h2>
-          </article>
-          <article class="le-temps-qui-passe">
-            <h2>Le temps qui passe</h2>
-          </article>
-          <article class="la-nature">
-            <h2>La nature</h2>
-          </article>
-          <article class="la-mort-et-la-melancolie">
-            <h2>La Mort et la mélancolie</h2>
-          </article>
-          <article class="engagement">
-            <h2>l'engagement</h2>
-          </article>
-        </section>
-        <input type="text" />
-        <textarea></textarea>
-        <select></select>
+        <input type="text" placeholder="Titre de votre poème" />
+        <textarea placeholder="Écrivez votre poème ici..."></textarea>
+        <select>
+          <option value="">Choisissez un thème</option>
+          <option value="amour">Amour</option>
+          <option value="nature">La nature</option>
+          <option value="melancolie">Mélancolie</option>
+        </select>
       </form>
+
+      <!-- 3. SECTION POÈMES DE LA COMMUNAUTÉ -->
+      <section class="poemes-communaute">
+        <div class="section-header">
+          <h2>Vos mots font fleurir le jardin.</h2>
+          <p>
+            Découvrez les dernières créations poétiques de notre communauté.
+          </p>
+        </div>
+
+        <div class="poemes-grid">
+          <!-- Carte Poème 1 -->
+          <article class="card-poeme">
+            <span class="badge badge-amour">Amour</span>
+            <h3>Les murmures du matin</h3>
+            <p class="extrait">
+              Le vent caresse doucement les feuilles,<br />
+              Chaque silence devient une mélodie,<br />
+              Et dans la rosée qui s'éveille,<br />
+              S'écrit l'éternité d'une vie.
+            </p>
+            <div class="poeme-footer">
+              <span class="auteur">Par Clara</span>
+            </div>
+          </article>
+
+          <!-- Carte Poème 2 -->
+          <article class="card-poeme">
+            <span class="badge badge-nature">Nature</span>
+            <h3>À la lumière du soir</h3>
+            <p class="extrait">
+              L'ombre grandit sous les sous-bois,<br />
+              La terre respire au rythme du vent,<br />
+              Et l'oiseau chante une dernière fois,<br />
+              Avant que la nuit ne prenne le devant.
+            </p>
+            <div class="poeme-footer">
+              <span class="auteur">Par Thomas</span>
+            </div>
+          </article>
+
+          <!-- Carte Poème 3 -->
+          <article class="card-poeme">
+            <span class="badge badge-melancolie">Mélancolie</span>
+            <h3>Iles Tuvalu</h3>
+            <p class="extrait">
+              Je pars de mes idees noirs,<br />
+              En me rappellant de la nostalgie,<br />
+              De ce pays auxquels il m'ont accueilli,<br />
+              Mais aujourd'hui deteste les noirs.
+            </p>
+            <div class="poeme-footer">
+              <span class="auteur">Par Teddy</span>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
+
     <footer></footer>
   </body>
 </html>
