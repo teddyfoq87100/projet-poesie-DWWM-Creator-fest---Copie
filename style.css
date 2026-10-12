@@ -42,11 +42,23 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    list-style: none;
-
+    
 }
 
 header ul{
     display: flex;
     gap: 25px;
+    list-style: none;
+}
+header nav a{
+    text-decoration: none;
+    color: #2D264B;
+}
+.btn-ecrire {
+    background-color: #5C4B99; /* Une nuance de violet élégante visible sur la maquette */
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 50px; /* Donne l'effet arrondi pilule */
+    font-weight: 500;
 }
