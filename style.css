@@ -1,22 +1,26 @@
 .amour{
-    background-color: crimson;
+    background-color: #F8D7DA; /* Un rose poudré doux */
+    color: #58151C;
     
 }
 .le-temps-qui-passe{
-    background-color: fuchsia;
+    background-color: #FFF3CD; /* Un jaune crème chaleureux */
+    color: #664D03;
     
 }
 .la-nature{
-    background-color: darkgreen;
+    background-color: #D1E7DD; /* Un vert sauge très doux */
+    color: #0F5132;
     
 }
 .la-mort-et-la-melancolie{
-    color: white;
-    background-color: black;
+    background-color: #E2E3E5; /* Un gris perle élégant */
+    color: #383D41;
    
 }
 .engagement{
-    background-color: cyan;
+    background-color: #CFF4FC; /* Un bleu pastel léger */
+    color: #055160;
     
 
 }
@@ -36,6 +40,7 @@
     text-align: center;
     padding: 10px;
     box-sizing: border-box;
+    border-radius: 12px;
 
 }
 header{
