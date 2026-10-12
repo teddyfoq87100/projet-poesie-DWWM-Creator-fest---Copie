@@ -36,5 +36,17 @@
     text-align: center;
     padding: 10px;
     box-sizing: border-box;
-    
+
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+
+}
+
+header ul{
+    display: flex;
+    gap: 25px;
 }
