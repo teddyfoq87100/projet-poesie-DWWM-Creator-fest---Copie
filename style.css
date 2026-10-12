@@ -67,3 +67,38 @@ header nav a{
     border-radius: 50px; /* Donne l'effet arrondi pilule */
     font-weight: 500;
 }
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 40px auto; /* Centre le formulaire sur la page avec des marges */
+    padding: 20px;
+    background-color: #FDFCFB; /* Un fond très léger et chaleureux */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Une ombre très discrète */
+}
+
+form input,
+form textarea,
+form select {
+    padding: 12px 15px;
+    border: 1px solid #D6D1E0; /* Une bordure aux tons violets/gris doux */
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #FFFFFF;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 120px; /* Donne assez de place pour écrire un poème */
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #5C4B99; /* Reprend la couleur violette de votre bouton */
+    box-shadow: 0 0 0 3px rgba(92, 75, 153, 0.15);
+}
