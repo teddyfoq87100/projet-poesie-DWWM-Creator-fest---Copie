@@ -21,3 +21,23 @@ app.get("/api/poems", (req, res) => {
     res.json(results);
   });
 });
+// Route pour récupérer les poèmes (avec filtre optionnel par thème)
+app.get("/api/poems", (req, res) => {
+  const { theme } = req.query;
+
+  let query = "SELECT * FROM poems";
+  const queryParams = [];
+
+  if (theme) {
+    query += " WHERE theme = ?";
+    queryParams.push(theme);
+  }
+
+  db.query(query, queryParams, (err, results) => {
+    if (err) {
+      console.error("Erreur lors de la récupération des poèmes :", err);
+      return res.status(500).json({ error: "Erreur interne du serveur" });
+    }
+    res.json(results);
+  });
+});
