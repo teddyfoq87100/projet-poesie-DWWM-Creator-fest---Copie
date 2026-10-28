@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion - The Garden of Poetry</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <h2>Connexion</h2>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Adresse email" required />
+        <input
+          type="password"
+          id="password"
+          placeholder="Mot de passe"
+          required
+        />
+        <button type="submit">Se connecter</button>
+      </form>
+      <p id="responseMessage"></p>
+      <p class="switch-link">
+        Pas encore de compte ? <a href="register.html">S'inscrire</a>
+      </p>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const messageEl = document.getElementById("responseMessage");
+
+          try {
+            const response = await fetch("/api/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              messageEl.style.color = "green";
+              messageEl.textContent = `${data.message} Bienvenue ${data.username} !`;
+              // Redirection vers l'accueil ou autre page après connexion réussie
+            } else {
+              messageEl.style.color = "red";
+              messageEl.textContent = data.error;
+            }
+          } catch (error) {
+            messageEl.style.color = "red";
+            messageEl.textContent = "Erreur de connexion au serveur.";
+          }
+        });
+    </script>
+  </body>
+</html>
