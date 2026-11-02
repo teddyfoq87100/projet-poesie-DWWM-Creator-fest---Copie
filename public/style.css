@@ -1,0 +1,172 @@
+/* --- STYLE GÉNÉRAL (Pages de Connexion / Inscription) --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* --- ADAPTATION POUR LA PAGE D'ACCUEIL (index.html) --- */
+body.home-page {
+    display: block;
+    height: auto;
+    padding: 2rem;
+}
+
+.main-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nav-links {
+    margin-bottom: 1.5rem;
+    text-align: right;
+}
+
+.nav-links a {
+    margin-left: 1rem;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* --- FORMULAIRES AUTHENTIFICATION --- */
+.auth-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-container h2 {
+    margin-bottom: 1.5rem;
+    color: #1e3a8a;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth-container input {
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.auth-container input:focus {
+    border-color: #3b82f6;
+}
+
+.auth-container button {
+    padding: 0.75rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.auth-container button:hover {
+    background-color: #1d4ed8;
+}
+
+#responseMessage {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.switch-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.switch-link a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.switch-link a:hover {
+    text-decoration: underline;
+}
+
+/* --- SECTION ET CARTES DE POÈMES (index.html) --- */
+.add-poem-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.add-poem-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-poem-section input, 
+.add-poem-section textarea {
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: inherit;
+    outline: none;
+}
+
+.add-poem-section input:focus, 
+.add-poem-section textarea:focus {
+    border-color: #3b82f6;
+}
+
+.add-poem-section button {
+    padding: 0.75rem;
+    background-color: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-poem-section button:hover {
+    background-color: #15803d;
+}
+
+.poem-card {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.poem-card h3 {
+    margin-top: 0;
+    color: #1e3a8a;
+}
+
+.poem-card p {
+    white-space: pre-line;
+    font-style: italic;
+    color: #334155;
+}

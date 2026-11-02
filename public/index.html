@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Garden of Poetry</title>
+    <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Barre de navigation -->
+      <nav class="nav-links">
+        <a href="login.html">Connexion</a>
+        <a href="register.html">Inscription</a>
+      </nav>
+
+      <!-- En-tête de la page -->
+      <header>
+        <h1>The Garden of Poetry</h1>
+        <p>Bienvenue dans notre jardin littéraire.</p>
+      </header>
+
+      <!-- Formulaire pour ajouter un poème -->
+      <section class="add-poem-section">
+        <h3>Planter un nouveau poème</h3>
+        <form id="poemForm">
+          <input type="text" id="title" placeholder="Titre" required />
+          <input type="text" id="author" placeholder="Auteur" required />
+          <input type="text" id="theme" placeholder="Thème" required />
+          <textarea
+            id="content"
+            placeholder="Votre poème..."
+            required
+          ></textarea>
+          <button type="submit">Publier</button>
+        </form>
+        <p id="formMessage"></p>
+      </section>
+
+      <!-- Liste où les poèmes de la base de données vont s'afficher -->
+      <section>
+        <h2>Les Poèmes du Jardin</h2>
+        <div id="poemsList">
+          <p>Chargement...</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Script JavaScript pour dynamiser la page -->
+    <script>
+      // 1. Récupérer et afficher les poèmes depuis le serveur
+      async function fetchPoems() {
+        try {
+          const response = await fetch("/api/poems");
+          const poems = await response.json();
+          const container = document.getElementById("poemsList");
+
+          if (poems.length === 0) {
+            container.innerHTML = "<p>Aucun poème pour le moment.</p>";
+            return;
+          }
+
+          container.innerHTML = "";
+          // Pour chaque poème, on crée une "carte" HTML
+          poems.forEach((poem) => {
+            const card = document.createElement("div");
+            card.className = "poem-card";
+            card.innerHTML = `
+                        <h3>${poem.title}</h3>
+                        <small>Par ${poem.author} | Thème : ${poem.theme}</small>
+                        <p>${poem.content}</p>
+                    `;
+            container.appendChild(card);
+          });
+        } catch (error) {
+          document.getElementById("poemsList").innerHTML =
+            "<p>Erreur de chargement.</p>";
+        }
+      }
+
+      // 2. Envoyer un nouveau poème au serveur quand on valide le formulaire
+      document
+        .getElementById("poemForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault(); // Empêche la page de se recharger
+
+          const newPoem = {
+            title: document.getElementById("title").value,
+            author: document.getElementById("author").value,
+            theme: document.getElementById("theme").value,
+            content: document.getElementById("content").value,
+          };
+
+          const msgEl = document.getElementById("formMessage");
+
+          try {
+            const response = await fetch("/api/poems", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(newPoem),
+            });
+
+            if (response.ok) {
+              msgEl.textContent = "Poème ajouté !";
+              document.getElementById("poemForm").reset(); // Vide le formulaire
+              fetchPoems(); // Recharge la liste des poèmes
+            } else {
+              msgEl.textContent = "Erreur lors de l'ajout.";
+            }
+          } catch (error) {
+            msgEl.textContent = "Erreur de connexion.";
+          }
+        });
+
+      // Lancer la récupération des poèmes dès que la page s'ouvre
+      fetchPoems();
+    </script>
+  </body>
+</html>
