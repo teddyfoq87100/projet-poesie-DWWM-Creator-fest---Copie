@@ -1,4 +1,3 @@
-/* --- STYLE GÉNÉRAL (Pages de Connexion / Inscription) --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
@@ -111,44 +110,60 @@ body.home-page {
 
 /* --- SECTION ET CARTES DE POÈMES (index.html) --- */
 .add-poem-section {
-    background: white;
-    padding: 1.5rem;
+    background: #ffffff;
+    padding: 20px;
     border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
 
-.add-poem-section form {
+.add-poem-section h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+#poemForm {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 12px; /* Espace entre chaque champ */
 }
 
-.add-poem-section input, 
-.add-poem-section textarea {
-    padding: 0.75rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+#poemForm input,
+#poemForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     font-family: inherit;
+    font-size: 14px;
+    box-sizing: border-box; /* Évite que les champs dépassent */
     outline: none;
+    transition: border-color 0.2s;
 }
 
-.add-poem-section input:focus, 
-.add-poem-section textarea:focus {
+#poemForm input:focus,
+#poemForm textarea:focus {
     border-color: #3b82f6;
 }
 
-.add-poem-section button {
-    padding: 0.75rem;
-    background-color: #16a34a;
+#poemForm textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#poemForm button {
+    background-color: #16a34a; /* Vert jardin */
     color: white;
+    padding: 10px 15px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
     transition: background-color 0.2s;
 }
 
-.add-poem-section button:hover {
+#poemForm button:hover {
     background-color: #15803d;
 }
 
@@ -169,4 +184,21 @@ body.home-page {
     white-space: pre-line;
     font-style: italic;
     color: #334155;
+}
+/* --- STYLE DU BOUTON DE SUPPRESSION --- */
+.delete-btn {
+    background-color: #ef4444; /* Rouge doux */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 12px;
+    transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626; /* Rouge plus foncé au survol */
 }

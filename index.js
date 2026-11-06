@@ -1,12 +1,23 @@
 const express = require("express");
+const session = require("express-session"); // 1. Import de express-session
 const app = express();
 const port = 3000;
 const db = require("./db");
 const bcrypt = require("bcrypt");
 
-// Middleware pour lire le JSON dans le corps des requêtes
+// Middleware pour lire le JSON dans le corps des requêtes et les fichiers statiques
 app.use(express.static("public"));
 app.use(express.json());
+
+// --- AJOUT IMPORTANT : Configuration du middleware de session ---
+app.use(
+  session({
+    secret: "mon_jardin_secret_tres_securise", // Vous pouvez mettre ce texte que vous voulez
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }, // false pour le développement en local (HTTP)
+  }),
+);
 
 app.get("/", (req, res) => {
   res.send("Le serveur de The Garden of Poetry fonctionne !");
@@ -68,7 +79,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-// 2. ROUTE DE CONNEXION
+// 2. ROUTE DE CONNEXION (Mémorisation de la session)
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -94,6 +105,88 @@ app.post("/api/login", (req, res) => {
       return res.status(401).json({ error: "Email ou mot de passe incorrect" });
     }
 
+    // --- ENREGISTREMENT DE L'UTILISATEUR DANS LA SESSION ---
+    req.session.userId = user.id;
+    req.session.username = user.username;
+
     res.json({ message: "Connexion réussie !", username: user.username });
+  });
+});
+
+// ROUTE D'AJOUT DE POÈME (Sécurisée : liée à l'utilisateur connecté)
+app.post("/api/poems", (req, res) => {
+  // Vérifiez si l'utilisateur est bien connecté via sa session
+  if (!req.session.userId) {
+    return res
+      .status(401)
+      .json({ error: "Vous devez être connecté pour publier un poème." });
+  }
+
+  const { title, author, theme, content } = req.body;
+  const userId = req.session.userId; // ID de l'utilisateur connecté
+
+  const query =
+    "INSERT INTO poems (title, author, theme, content, user_id) VALUES (?, ?, ?, ?, ?)";
+  db.query(query, [title, author, theme, content, userId], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: "Erreur lors de l'enregistrement du poème." });
+    }
+    res.status(201).json({ message: "Poème publié avec succès !" });
+  });
+});
+// Route pour vérifier si l'utilisateur est connecté
+app.get("/api/check-auth", (req, res) => {
+  if (req.session && req.session.userId) {
+    res.json({ loggedIn: true, username: req.session.username });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
+
+// Optionnel : Route de déconnexion
+app.post("/api/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err)
+      return res.status(500).json({ error: "Erreur lors de la déconnexion" });
+    res.clearCookie("connect.sid"); // Nom par défaut du cookie de session
+    res.json({ message: "Déconnexion réussie" });
+  });
+});
+// ==========================================
+// ROUTE : Supprimer un poème du jardin
+// ==========================================
+app.delete("/api/poems/:id", (req, res) => {
+  // 1. On vérifie d'abord si l'utilisateur est bien connecté via sa session
+  if (!req.session.userId) {
+    return res
+      .status(401)
+      .json({ error: "Vous devez être connecté pour supprimer un poème." });
+  }
+
+  const poemId = req.params.id;
+  const userId = req.session.userId; // ID de l'utilisateur connecté
+
+  // 2. On prépare la requête de suppression dans la base de données
+  // Sécurité : on s'assure que le poème appartient bien à l'utilisateur (user_id = userId)
+  const query = "DELETE FROM poems WHERE id = ? AND user_id = ?";
+
+  db.query(query, [poemId, userId], (err, result) => {
+    if (err) {
+      console.error("Erreur lors de la suppression du poème :", err);
+      return res.status(500).json({ error: "Erreur interne du serveur." });
+    }
+
+    // Si aucune ligne n'a été effacée, c'est que le poème n'existe pas ou n'appartient pas à cet utilisateur
+    if (result.affectedRows === 0) {
+      return res
+        .status(403)
+        .json({ error: "Action non autorisée ou poème introuvable." });
+    }
+
+    // Succès !
+    res.json({ message: "Poème supprimé avec succès du jardin !" });
   });
 });

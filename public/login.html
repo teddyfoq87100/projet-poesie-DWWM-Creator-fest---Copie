@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Connexion - The Garden of Poetry</title>
+    <!-- Lien vers la feuille de style dédiée aux formulaires -->
     <link rel="stylesheet" href="style2.css" />
   </head>
   <body>
     <div class="auth-container">
-      <h2>Connexion</h2>
+      <h2>Connexion au Jardin</h2>
+
+      <!-- Formulaire de connexion -->
       <form id="loginForm">
         <input type="email" id="email" placeholder="Adresse email" required />
         <input
@@ -19,16 +22,22 @@
         />
         <button type="submit">Se connecter</button>
       </form>
+
+      <!-- Message de retour (succès ou erreur) -->
       <p id="responseMessage"></p>
+
+      <!-- Lien pour basculer vers l'inscription -->
       <p class="switch-link">
         Pas encore de compte ? <a href="register.html">S'inscrire</a>
       </p>
     </div>
 
+    <!-- Script JavaScript gérant la soumission du formulaire de connexion -->
     <script>
       document
         .getElementById("loginForm")
         .addEventListener("submit", async (e) => {
+          // Empêche le rechargement classique de la page
           e.preventDefault();
 
           const email = document.getElementById("email").value;
@@ -36,6 +45,7 @@
           const messageEl = document.getElementById("responseMessage");
 
           try {
+            // Envoi des identifiants au serveur Express
             const response = await fetch("/api/login", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -46,15 +56,20 @@
 
             if (response.ok) {
               messageEl.style.color = "green";
-              messageEl.textContent = `${data.message} Bienvenue ${data.username} !`;
-              // Redirection vers l'accueil ou autre page après connexion réussie
+              messageEl.textContent = `${data.message} Bienvenue ${data.username} ! Redirection...`;
+
+              // Redirection automatique vers l'accueil après 1.5 seconde
+              setTimeout(() => {
+                window.location.href = "index.html";
+              }, 1500);
             } else {
               messageEl.style.color = "red";
-              messageEl.textContent = data.error;
+              messageEl.textContent = data.error || "Identifiants incorrects.";
             }
           } catch (error) {
             messageEl.style.color = "red";
             messageEl.textContent = "Erreur de connexion au serveur.";
+            console.error("Erreur :", error);
           }
         });
     </script>
